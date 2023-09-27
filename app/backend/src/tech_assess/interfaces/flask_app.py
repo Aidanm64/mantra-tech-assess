@@ -4,10 +4,13 @@ from tech_assess.service import queries
 from tech_assess.config import get_file_storage_config
 
 import json
-from flask import Flask, request, Response, abort, send_from_directory
+from flask import Flask, request, Response, abort, send_file
+from flask_cors import CORS
 from pydantic import ValidationError
 
 app = Flask(__name__)
+CORS(app)
+
 bus = bootstrap()
 
 
@@ -50,9 +53,5 @@ def get_recording_output(uuid):
 
     result = queries.get_recording_output(recording_uuid=uuid, uow=bus.uow)
 
-    return send_from_directory(result)
+    return send_file(result)
 
-
-@app.route("/files/<file_name>", methods=['GET'])
-def get_file(file_name):
-    return send_from_directory(file_name)

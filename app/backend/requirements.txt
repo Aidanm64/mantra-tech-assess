@@ -2,3 +2,4 @@ flask
 pydantic
 pymongo
 gunicorn
+flask-cors

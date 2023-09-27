@@ -98,15 +98,15 @@ class MongoRecordingRepository(MongoRepository):
                              video_only_file):
 
         audio_video_filepath = os.path.join(self.recordings_folder,
-                                            audio_video_file.filename)
+                                            uuid + "_av_" + audio_video_file.filename)
         audio_video_file.save(audio_video_filepath)
 
         audio_only_filepath = os.path.join(self.recordings_folder,
-                                           audio_only_file.filename)
+                                           uuid + "_a_" + audio_only_file.filename)
         audio_only_file.save(audio_only_filepath)
 
         video_only_filepath = os.path.join(self.recordings_folder,
-                                           video_only_file.filename)
+                                           uuid + "_v_" + video_only_file.filename)
         video_only_file.save(video_only_filepath)
 
         combined_video_filepath = os.path.join(self.recordings_folder, f'{uuid}_combined')
