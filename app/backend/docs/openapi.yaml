@@ -1,0 +1,81 @@
+openapi: '3.0.2'
+
+info:
+  title: Tech Assessment Backend API
+  version: 1.0.0
+  contact:
+    name: Aidan McKenna
+    email: aidantmckenna@gmail.com
+
+servers:
+  - url: http://localhost:8000
+
+paths:
+  /recordings:
+    post:
+      summary: Upload a set of recordings
+      requestBody:
+        description: Asset file and tags
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                audio_video:
+                  type: string
+                  format: binary
+                audio_only:
+                  type: string
+                  format: binary
+                video_only:
+                  type: string
+                  format: binary
+            encoding:
+              file:
+                contentType: audio/mpeg
+      responses:
+        '201':
+          description: Files uploaded
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request.
+        '415':
+          description: Unsupported media file format.
+        '5XX':
+          description: Unexpected error.
+
+  /recordings/{uuid}:
+    get:
+      parameters:
+        - $ref: "#/components/parameters/RecordingUUID"
+      summary: Get recording object
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Recording"
+
+
+components:
+  schemas:
+    Recording:
+      type: object
+      properties:
+        audio_video_url:
+          type: string
+        audio_only_filepath
+
+  parameters:
+    RecordingUUID:
+      in: path
+      name: recording_uuid
+      required: true
+      schema:
+        type: string
+        format: uuid
