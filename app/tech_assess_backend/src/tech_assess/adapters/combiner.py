@@ -35,12 +35,11 @@ class Wav2LipCombiner(Combiner):
             --checkpoint_path "/app/lib/wav2lip-hq/checkpoints/wav2lip_gan.pth" \
             --segmentation_path "/app/lib/wav2lip-hq/checkpoints/face_segmentation.pth" \
             --sr_path "/app/lib/wav2lip-hq/checkpoints/esrgan_yunying.pth" \
+            --save_frames \
             --face {video_filepath} \
             --audio {audio_filepath} \
             --outfile {output_filepath}'''
         for line in execute(command):
-            print(line, end="")
-        for line in execute("ls /files/recordings"):
             print(line, end="")
         return output_filepath
 
