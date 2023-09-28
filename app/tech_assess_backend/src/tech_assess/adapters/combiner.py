@@ -1,3 +1,5 @@
+from tech_assess.logs import Benchmarker
+
 import subprocess
 
 
@@ -27,9 +29,13 @@ class MockCombiner(Combiner):
 class Wav2LipCombiner(Combiner):
 
     def train(self, video_filepath):
+
+        # TODO: add training procedure
         pass
 
     def combine(self, audio_filepath, video_filepath, output_filepath):
+        benchmarker = Benchmarker("wav2lip-hq")
+        benchmarker.start()
 
         command = f'''python /app/lib/wav2lip-hq/inference.py \
             --checkpoint_path "/app/lib/wav2lip-hq/checkpoints/wav2lip_gan.pth" \
@@ -41,6 +47,9 @@ class Wav2LipCombiner(Combiner):
             --outfile {output_filepath}'''
         for line in execute(command):
             print(line, end="")
+
+        benchmarker.end()
+
         return output_filepath
 
 

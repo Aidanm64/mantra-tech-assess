@@ -16,7 +16,6 @@ def create_recording(cmd: commands.CreateRecording, uow: UnitOfWork):
 
 def combine_audio_video(event: events.RecordingCreated, uow: UnitOfWork,
                         combiner: Combiner):
-
     with uow:
         recording = uow.recordings.get_by_uuid(event.recording_uuid)
 

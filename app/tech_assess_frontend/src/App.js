@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import RecorderView from './recorderView.js';
 import LoadingSpinner from './loadingSpinner.js'
@@ -6,7 +5,6 @@ import { useState, useEffect } from 'react';
 
 
 const host = "http://localhost:8000"
-const RECORDING_LENGTH = 10000
 
 function App() {
 
@@ -50,44 +48,45 @@ function App() {
 
   var page = null;
   switch (showView){
-    case "recording":
+    case "processing":
       page = (
-      <div>
-      <p> Record each sample and press submit</p>
-        <div className="rows">
-          <RecorderView name="Audio & Video" useVideo={true} useAudio={true} onStop={(blobUrl, blob) => {setAudioVideoFile(blob)}} />
-          <RecorderView name="Audio Only" useVideo={false} useAudio={true} onStop={(blobUrl, blob) => {setAudioOnlyFile(blob)}} />
-          <RecorderView name="Video Only" useVideo={true} useAudio={false} onStop={(blobUrl, blob) => {setVideoOnlyFile(blob)}} />
-        </div>
-        <div>
-          <button className="submitButton" onClick={handleSubmit}>Submit</button>
-        </div>
-      </div>
-    );
+        <div style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100%"
+        }}>
+          <h2>combining video...</h2>
+          <LoadingSpinner />
+        </div>)
       break;
-  case "processing":
-    page = (
-      <div style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "100%"
-      }}>
-        <h2>combining video...</h2>
-        <LoadingSpinner />
-      </div>)
-    break;
-  case "playback":
-      page = (
-        <div>
+    case "playback":
+        page = (
           <div>
-            <video src={host.concat('/recordings/').concat(recordingUuid).concat('/output')} type="video/mp4" controls autoPlay loop/>
+            <div>
+              <video src={host.concat('/recordings/').concat(recordingUuid).concat('/output')} type="video/mp4" controls autoPlay loop/>
+            </div>
+            <div>
+              <span><button className="submitButton" onClick={reloadWindow}>Restart</button></span>
+            </div>
+          </div>
+        );
+        break;
+    default:
+        page = (
+        <div>
+        <p> Record each sample and press submit</p>
+          <div className="rows">
+            <RecorderView name="Audio & Video" useVideo={true} useAudio={true} onStop={(blobUrl, blob) => {setAudioVideoFile(blob)}} />
+            <RecorderView name="Audio Only" useVideo={false} useAudio={true} onStop={(blobUrl, blob) => {setAudioOnlyFile(blob)}} />
+            <RecorderView name="Video Only" useVideo={true} useAudio={false} onStop={(blobUrl, blob) => {setVideoOnlyFile(blob)}} />
           </div>
           <div>
-            <span><button className="submitButton" onClick={reloadWindow}>Restart</button></span>
+            <button className="submitButton" onClick={handleSubmit}>Submit</button>
           </div>
         </div>
       );
+        break;
   }
 
   return (
