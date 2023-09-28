@@ -55,9 +55,9 @@ function App() {
       <div>
       <p> Record each sample and press submit</p>
         <div className="rows">
-          <RecorderView name="Audio & Video" duration={RECORDING_LENGTH} useVideo={true} useAudio={true} onStop={(blobUrl, blob) => {setAudioVideoFile(blob)}} />
-          <RecorderView name="Audio Only" duration={RECORDING_LENGTH} useVideo={false} useAudio={true} onStop={(blobUrl, blob) => {setAudioOnlyFile(blob)}} />
-          <RecorderView name="Video Only" duration={RECORDING_LENGTH*1.5} useVideo={true} useAudio={false} onStop={(blobUrl, blob) => {setVideoOnlyFile(blob)}} />
+          <RecorderView name="Audio & Video" useVideo={true} useAudio={true} onStop={(blobUrl, blob) => {setAudioVideoFile(blob)}} />
+          <RecorderView name="Audio Only" useVideo={false} useAudio={true} onStop={(blobUrl, blob) => {setAudioOnlyFile(blob)}} />
+          <RecorderView name="Video Only" useVideo={true} useAudio={false} onStop={(blobUrl, blob) => {setVideoOnlyFile(blob)}} />
         </div>
         <div>
           <button className="submitButton" onClick={handleSubmit}>Submit</button>
