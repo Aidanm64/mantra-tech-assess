@@ -20,13 +20,13 @@ def combine_audio_video(event: events.RecordingCreated, uow: UnitOfWork,
     with uow:
         recording = uow.recordings.get_by_uuid(event.recording_uuid)
 
-        combiner.train(video_file=recording.audio_video_filepath)
+        combiner.train(video_filepath=recording.audio_video_filepath)
 
         combiner.combine(audio_filepath=recording.audio_only_filepath,
                          video_filepath=recording.video_only_filepath,
                          output_filepath=recording.combined_video_filepath)
 
-        recording.update_combination_status(percentage=100)
+        recording.update_combination_completion_percentage(percent=100)
         uow.recordings.update(recording)
 
 

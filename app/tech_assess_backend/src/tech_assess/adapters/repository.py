@@ -109,7 +109,7 @@ class MongoRecordingRepository(MongoRepository):
                                            uuid + "_v_" + video_only_file.filename)
         video_only_file.save(video_only_filepath)
 
-        combined_video_filepath = os.path.join(self.recordings_folder, f'{uuid}_combined')
+        combined_video_filepath = os.path.join(self.recordings_folder, f'{uuid}_combined.mp4')
         recording = Recording(
             uuid=uuid,
             audio_video_filepath=audio_video_filepath,

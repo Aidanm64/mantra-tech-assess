@@ -1,4 +1,4 @@
-version: '3.1'
+version: '3.7'
 
 services:
   mongo:
@@ -10,7 +10,7 @@ services:
 
   tech_assess_backend:
     build:
-      context: ./backend
+      context: ./tech_assess_backend
       dockerfile: Dockerfile
       args:
         options: --reload
@@ -22,17 +22,26 @@ services:
       MONGODB_DB_NAME: recordings
     depends_on:
       - mongo
-    ports: ["8000:8000"]
-#
-#  tech_assess_frontend:
-#    container_name: tech_asses_frontend
-#    build:
-#      context: frontend
-#      dockerfile: Dockerfile
-#    volumes:
-#      - '.:/app'
-#      - '/app/node_modules'
-#    ports:
-#      - 3001:3000
-#    environment:
-#      - CHOKIDAR_USEPOLLING=true
+    ports: 
+      - "8000:8000"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  tech_assess_frontend:
+    container_name: tech_assess_frontend
+    build:
+      context: ./tech_assess_frontend
+      dockerfile: Dockerfile
+    command: npm start
+    volumes:
+      #- '.:/app'
+      - '/app/node_modules'
+    ports:
+      - 3000:3000
+    environment:
+      - CHOKIDAR_USEPOLLING=true

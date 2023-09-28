@@ -15,9 +15,9 @@ def test_create_recording(wait_for_api):
 
     request_session, api_url, headers = wait_for_api
 
-    audio_video_file = open("backend/test/data/audio_video_file.mp4", 'rb')
-    audio_only_file = open("backend/test/data/audio_only_file.aac", 'rb')
-    video_only_file = open("backend/test/data/video_only_file.mp4", 'rb')
+    audio_video_file = open("./test/data/audio_video_file.mp4", 'rb')
+    audio_only_file = open("./test/data/audio_only_file.aac", 'rb')
+    video_only_file = open("./test/data/video_only_file.mp4", 'rb')
     response = request_session.post(api_url + "recordings",
                                     files={
                                         'audio_video_file': audio_video_file,

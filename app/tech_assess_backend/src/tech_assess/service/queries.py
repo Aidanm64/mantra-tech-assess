@@ -9,4 +9,4 @@ def get_recording(uow: UnitOfWork, recording_uuid: str):
 
 def get_recording_output(uow: UnitOfWork, recording_uuid: str):
     recording = uow.recordings.get_by_uuid(uuid=recording_uuid)
-    return recording.audio_video_filepath
+    return recording.combined_video_filepath

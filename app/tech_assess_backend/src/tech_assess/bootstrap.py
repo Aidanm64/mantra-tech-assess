@@ -10,7 +10,7 @@ from tech_assess.adapters import external_bus, combiner
 def bootstrap(
     uow: UnitOfWork=MongoUnitOfWork(),
     publish: Callable=external_bus.publish,
-    combiner: combiner.Combiner=combiner.MockCombiner()
+    combiner: combiner.Combiner=combiner.Wav2LipCombiner()
 ) -> MessageBus:
 
     dependencies = {
