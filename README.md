@@ -41,11 +41,12 @@ then, in a separate shell
 then you can navigate to http://localhost:3000
 
 
-
 ## Notes
 - I struggled to get consitent results for wav2lib processing time and quility. Occasionally it takes a relatively short period of time to process the files and return a desirable output. The more common experience is that the processing time will be long and the output will consist of the audio overlaid onto a truncated, looping portion of the input video. I've determined that wait time and quality are related to the value "Length of mel chunks" thats shown in wav2lib output.
 
 - I use the [cosmic python](https://www.cosmicpython.com/) approach to building web applications as it provides excellent flexibility in design and ease of testing. It can be a lot to take in at first so let me know if you have any questions.
+
+- API documentation can be found [here](https://github.com/Aidanm64/mantra-tech-assess/blob/master/app/tech_assess_backend/docs/openapi.yaml)
 
 
 ## Next steps
