@@ -1,6 +1,5 @@
 import './App.css'
 import { useReactMediaRecorder } from "react-media-recorder";
-import { useEffect } from 'react';
 
 function RecorderView(props){
   const { status, startRecording, stopRecording, mediaBlobUrl } =
